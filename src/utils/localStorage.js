@@ -7,6 +7,7 @@ export const AdminToken="AdminToken";
 export const AdminEmail="AdminEmail";
 export const AdminPassword="AdminPassword";
 export const IsAdmin="IsAdmin";
+export const IsLogged="IsLogged";
 export const UserEmail="UserEmail"
 export const UserId="UserId"
 export const UserMIS="UserMIS"

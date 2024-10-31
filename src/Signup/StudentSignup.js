@@ -3,7 +3,7 @@ import { showToast } from "../slice/appConfigSlice";
 import { TOAST_ERROR, TOAST_SUCCESS } from "../App";
 import { useDispatch } from "react-redux";
 import { axiosClient } from "../utils/axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const StudentSignup = () => {
   const [email, setEmail] = useState("");
@@ -86,7 +86,7 @@ const StudentSignup = () => {
 
   return (
     <div>
-      <form onSubmit={SubmitForm} className="max-w-[400px] mx-auto py-6 my-8 rounded-lg shadow-lg">
+      <form onSubmit={SubmitForm} className="max-w-[500px] mx-auto py-6 my-8 px-5 rounded-lg shadow-lg">
         <h2 className="text-center text-2xl font-bold mb-4">Sign Up</h2>
         {[
           { label: 'Name', type: 'text', stateSetter: setName },
@@ -114,6 +114,15 @@ const StudentSignup = () => {
         >
           Submit
         </button>
+
+        <div className="flex mt-8 justify-center items-center gap-2">
+          <h2>Already have an account </h2>
+        <Link to="/student/login"
+          className="w-[60px] flex justify-center items-center py-2 bg-green-400 text-white font-bold  rounded-md hover:bg-green-500 transition duration-200"
+        >
+          Login
+        </Link>
+        </div>
       </form>
     </div>
   );

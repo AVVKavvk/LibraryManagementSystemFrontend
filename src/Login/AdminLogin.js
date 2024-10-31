@@ -3,8 +3,8 @@ import { showToast } from "../slice/appConfigSlice";
 import { TOAST_ERROR, TOAST_SUCCESS } from "../App";
 import { useDispatch } from "react-redux";
 import { axiosClient } from "../utils/axios";
-import { useNavigate } from "react-router-dom";
-import { getItem, setItem, UserEmail, UserName, UserNumber } from "../utils/localStorage";
+import { Link, useNavigate } from "react-router-dom";
+import { getItem, IsAdmin, IsLogged, setItem, UserEmail, UserName, UserNumber } from "../utils/localStorage";
 
 const AdminSignup = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +25,8 @@ const AdminSignup = () => {
           setItem(UserEmail,res?.data?.email)
           setItem(UserName,res?.data?.name)
           setItem(UserNumber,res?.data?.phone)
-
+          setItem(IsAdmin,true)
+          setItem(IsLogged,true)
           navigate('/')
           
         }
@@ -38,7 +39,7 @@ const AdminSignup = () => {
 
   return (
     <div>
-      <form onSubmit={SubmitForm} className="max-w-[400px] mx-auto py-6 my-8 rounded-lg shadow-lg">
+      <form onSubmit={SubmitForm} className="max-w-[400px] mx-auto p-6 my-8 rounded-lg shadow-lg">
         <h2 className="text-center text-2xl font-bold mb-4">Login</h2>
         {[
           { label: 'Email', type: 'email', stateSetter: setEmail },
@@ -61,6 +62,14 @@ const AdminSignup = () => {
         >
           Submit
         </button>
+        <div className="flex mt-8 justify-center items-center gap-2">
+          <h2>Don't have account </h2>
+        <Link to="/admin/signup"
+          className="w-[80px] flex justify-center items-center py-2 bg-green-400 text-white font-bold  rounded-md hover:bg-green-500 transition duration-200"
+        >
+          Sign in
+        </Link>
+        </div>
       </form>
     </div>
   );

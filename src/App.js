@@ -2,14 +2,18 @@ import toast, { Toaster } from "react-hot-toast";
 import LoadingBar from "react-top-loading-bar";
 import { useSelector } from "react-redux";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { axiosClient } from "./utils/axios";
 import Loader from "./helper/Loader";
 import { Route, Routes } from "react-router-dom";
+import Navbar from "./navbar";
 
 const AdminSignup = lazy(()=> import('./Signup/AdminSignup'))
 const AdminLogin = lazy(()=> import('./Login/AdminLogin'))
 const StudentSignup = lazy(()=>import('./Signup/StudentSignup'))
 const StudentLogin = lazy(()=>import('./Login/StudentLogin'))
+const Login = lazy(()=>import('./components/Login'))
+const Signup = lazy(()=>import('./components/Signup'))
+
+
 
 export const TOAST_SUCCESS = "toast_success";
 export const TOAST_ERROR = "toast_error";
@@ -18,18 +22,6 @@ function App() {
   const isLoading = useSelector((state) => state.appConfigReducer.isloading);
   const toastData = useSelector((state) => state.appConfigReducer.toastData);
   const loadingRef = useRef(null);
-  const [data, setData] = useState({});
-
-  const AA = async () => {
-    try {
-      const response = await axiosClient.get("admin/books");
-      // console.log(response);
-      
-      // setData(response.data);
-    } catch (err) {
-      console.error("Error fetching data:", err);
-    }
-  };
 
   useEffect(() => {
     if (isLoading) {
@@ -51,19 +43,21 @@ function App() {
         break;
     }
   }, [toastData]);
-
-  useEffect(() => {
-    // AA();
-  }, []);
-
   return (
-    <div>
+    <div className="bg-slate-100 min-h-[120vh]">
       <LoadingBar color="#f11946" ref={loadingRef} />
-      <div>
         <Toaster />
-      </div>
+        <Navbar/>
 
       <Routes>
+      <Route
+            path="/signup"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Signup />
+              </Suspense>
+            }
+          />
       <Route
             path="/admin/signup"
             element={
@@ -77,6 +71,14 @@ function App() {
             element={
               <Suspense fallback={<Loader />}>
                 <StudentSignup />
+              </Suspense>
+            }
+          />
+      <Route
+            path="/login"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Login />
               </Suspense>
             }
           />

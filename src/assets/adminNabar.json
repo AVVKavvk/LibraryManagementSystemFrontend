@@ -1,0 +1,22 @@
+[
+  {
+    "tag":"Books",
+    "link":"books"
+  },
+  {
+    "tag":"Issued Books",
+    "link":"issued"
+  },
+  {
+    "tag":"Student",
+    "link":"student"
+  },
+  {
+    "tag":"Admin",
+    "link":"admin"
+  },
+  {
+    "tag":"Others",
+    "link":"others"
+  }
+]
