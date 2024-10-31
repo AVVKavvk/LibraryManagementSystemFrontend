@@ -4,7 +4,7 @@ import { TOAST_ERROR, TOAST_SUCCESS } from "../App";
 import { useDispatch } from "react-redux";
 import { axiosClient } from "../utils/axios";
 import { Link, useNavigate } from "react-router-dom";
-import { getItem, IsAdmin, IsLogged, setItem, UserEmail, UserName, UserNumber } from "../utils/localStorage";
+import { AdminID, getItem, IsAdmin, IsLogged, setItem, UserEmail, UserName, UserNumber } from "../utils/localStorage";
 
 const AdminSignup = () => {
   const [email, setEmail] = useState("");
@@ -14,17 +14,17 @@ const AdminSignup = () => {
 
   const SubmitForm = async (e) => {
     e.preventDefault();
-
+    
      try {
         const res = await axiosClient.post('/login/admin',{
           email,
           password
-        })
-
+        })        
         if (res){            
           setItem(UserEmail,res?.data?.email)
           setItem(UserName,res?.data?.name)
           setItem(UserNumber,res?.data?.phone)
+          setItem(AdminID,res?.data?._id)
           setItem(IsAdmin,true)
           setItem(IsLogged,true)
           navigate('/')
