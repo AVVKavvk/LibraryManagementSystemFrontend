@@ -2,7 +2,7 @@ import axios from "axios";
 import store from "../slice/store";
 import { setLoading, showToast } from "../slice/appConfigSlice";
 import { TOAST_ERROR, TOAST_SUCCESS } from "../App";
-
+import {getItem,UserEmail} from './localStorage'
 export const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_SERVER_BASE_URL,
   withCredentials: true,
@@ -11,9 +11,8 @@ export const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   (request) => {
     store.dispatch(setLoading(true));
-
-    const accessToken = localStorage.getItem("Key_Access_Token"); 
-    request.headers['X-Admin-Email'] = "vipin@gmail.com";
+    const admin_email = getItem(UserEmail)
+    request.headers['X-Admin-Email'] = `${admin_email}`;
     return request;
   },
   (error) => {
