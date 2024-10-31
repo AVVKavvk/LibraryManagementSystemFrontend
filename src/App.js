@@ -1,8 +1,15 @@
 import toast, { Toaster } from "react-hot-toast";
 import LoadingBar from "react-top-loading-bar";
 import { useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { axiosClient } from "./utils/axios";
+import Loader from "./helper/Loader";
+import { Route, Routes } from "react-router-dom";
+
+const AdminSignup = lazy(()=> import('./Signup/AdminSignup'))
+const AdminLogin = lazy(()=> import('./Login/AdminLogin'))
+const StudentSignup = lazy(()=>import('./Signup/StudentSignup'))
+const StudentLogin = lazy(()=>import('./Login/StudentLogin'))
 
 export const TOAST_SUCCESS = "toast_success";
 export const TOAST_ERROR = "toast_error";
@@ -46,7 +53,7 @@ function App() {
   }, [toastData]);
 
   useEffect(() => {
-    AA();
+    // AA();
   }, []);
 
   return (
@@ -55,17 +62,41 @@ function App() {
       <div>
         <Toaster />
       </div>
-      <div>
-        {data && typeof data === "object" ? (
-          JSON.stringify(data, null, 2) 
-        ) : (
-          <p>{data}</p>
-        )}
-      </div>
 
-      <h1 className=" bg-green-400">
-        vipin
-      </h1>
+      <Routes>
+      <Route
+            path="/admin/signup"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AdminSignup />
+              </Suspense>
+            }
+          />
+      <Route
+            path="/student/signup"
+            element={
+              <Suspense fallback={<Loader />}>
+                <StudentSignup />
+              </Suspense>
+            }
+          />
+      <Route
+            path="/admin/login"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AdminLogin />
+              </Suspense>
+            }
+          />
+      <Route
+            path="/student/login"
+            element={
+              <Suspense fallback={<Loader />}>
+                <StudentLogin />
+              </Suspense>
+            }
+          />
+      </Routes>
     </div>
   );
 }
