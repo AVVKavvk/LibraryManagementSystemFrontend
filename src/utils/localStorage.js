@@ -7,11 +7,14 @@ export const AdminToken="AdminToken";
 export const AdminEmail="AdminEmail";
 export const AdminPassword="AdminPassword";
 export const IsAdmin="IsAdmin";
+export const IsLogged="IsLogged";
 export const UserEmail="UserEmail"
 export const UserId="UserId"
 export const UserMIS="UserMIS"
 export const UserSem="UserSem"
 export const UserCourse="UserCourse"
+export const AdminID="AdminID"
+export const StudentID="StudentID"
 
 export function getItem(key){
     return localStorage.getItem(key);

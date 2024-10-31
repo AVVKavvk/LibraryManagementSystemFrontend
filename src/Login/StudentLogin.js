@@ -3,8 +3,8 @@ import { showToast } from "../slice/appConfigSlice";
 import { TOAST_ERROR, TOAST_SUCCESS } from "../App";
 import { useDispatch } from "react-redux";
 import { axiosClient } from "../utils/axios";
-import { useNavigate } from "react-router-dom";
-import { getItem, setItem, UserCourse, UserEmail, UserMIS, UserName, UserNumber, UserSem } from "../utils/localStorage";
+import { Link, useNavigate } from "react-router-dom";
+import { getItem, IsLogged, setItem, UserCourse, UserEmail, UserMIS, UserName, UserNumber, UserSem } from "../utils/localStorage";
 
 const StudentSignup = () => {
   const [password, setPassword] = useState("");
@@ -45,6 +45,7 @@ const StudentSignup = () => {
           setItem(UserCourse,data?.course)
           setItem(UserSem,data?.sem)
           setItem(UserMIS,data?.mis)
+          setItem(IsLogged,true)
 
           // console.log(getItem(UserEmail),getItem(UserName),getItem(UserCourse),getItem(UserMIS),getItem(UserSem),getItem(UserNumber));
           navigate("/")
@@ -58,7 +59,7 @@ const StudentSignup = () => {
 
   return (
     <div>
-      <form onSubmit={SubmitForm} className="max-w-[400px] mx-auto py-6 my-8 rounded-lg shadow-lg">
+      <form onSubmit={SubmitForm} className="max-w-[400px] mx-auto p-6 my-8 rounded-lg shadow-lg">
         <h2 className="text-center text-2xl font-bold mb-4">Login</h2>
         {[
           { label: 'MIS', type: 'text', stateSetter: setMIS },
@@ -80,6 +81,14 @@ const StudentSignup = () => {
         >
           Submit
         </button>
+        <div className="flex mt-8 justify-center items-center gap-2">
+          <h2>Don't have account </h2>
+        <Link to="/student/signup"
+          className="w-[80px] flex justify-center items-center py-2 bg-green-400 text-white font-bold  rounded-md hover:bg-green-500 transition duration-200"
+        >
+          Sign in
+        </Link>
+        </div>
       </form>
     </div>
   );
