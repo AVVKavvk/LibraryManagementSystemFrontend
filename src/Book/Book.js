@@ -4,8 +4,10 @@ import Intro from './Intro';
 
 const CreateBook = lazy(() => import('./CreateBook'));
 const GetAllBooks = lazy(()=>import('./GetAllBooks'))
-const GetBookById = lazy(()=>import('./GetBookById.js'))
-
+const GetBookById = lazy(()=>import('./GetBookById'))
+const GetBookByCourse = lazy(()=>import('./GetBookByCourse'))
+const GetBookBySem = lazy(()=> import('./GetBookBySem'))
+const UpdateBookCount = lazy(()=> import('./UpdateBookCount'))
 
 const Book = () => {
   return (
@@ -25,15 +27,23 @@ const Book = () => {
           <li>
             <Link
               to="/books/add-book"
-              className="w-full p-2 block rounded-lg bg-gray-700 hover:bg-gray-600"
+              className="w-full p-2 block rounded-lg bg-gray-700 hover:bg-yellow-400"
             >
               Add Book
             </Link>
           </li>
           <li>
             <Link
+              to="/books/update"
+              className="w-full p-2 block rounded-lg bg-gray-700 hover:bg-yellow-400"
+            >
+              Update Book Count
+            </Link>
+          </li>
+          <li>
+            <Link
               to="/books/allbooks"
-              className="w-full p-2 block rounded-lg bg-gray-700 hover:bg-gray-600"
+              className="w-full p-2 block rounded-lg bg-gray-700 hover:bg-green-500"
             >
               All Books
             </Link>
@@ -41,9 +51,25 @@ const Book = () => {
           <li>
             <Link
               to="/books/book"
-              className="w-full p-2 block rounded-lg bg-gray-700 hover:bg-gray-600"
+              className="w-full p-2 block rounded-lg bg-gray-700 hover:bg-green-500"
             >
               Book By ID
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/books/course"
+              className="w-full p-2 block rounded-lg bg-gray-700 hover:bg-green-500"
+            >
+              Book By Course
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/books/sem"
+              className="w-full p-2 block rounded-lg bg-gray-700 hover:bg-green-500"
+            >
+              Book By Sem
             </Link>
           </li>
         </ul>
@@ -54,8 +80,11 @@ const Book = () => {
         <Routes>
           <Route path="intro" element={<Intro />} />
           <Route path="add-book" element={<CreateBook />} />
+          <Route path="update" element={<UpdateBookCount />} />
           <Route path="allbooks" element={<GetAllBooks />} />
           <Route path="book" element={<GetBookById />} />
+          <Route path="course" element={<GetBookByCourse />} />
+          <Route path="sem" element={<GetBookBySem />} />
           <Route path="*" element={<Intro />} />
         </Routes>
       </div>

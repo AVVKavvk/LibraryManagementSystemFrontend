@@ -5,6 +5,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import Loader from "./helper/Loader";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./navbar";
+import PageNotFount from './helper/PageNotFount'
 
 const AdminSignup = lazy(()=> import('./Signup/AdminSignup'))
 const AdminLogin = lazy(()=> import('./Login/AdminLogin'))
@@ -115,6 +116,7 @@ function App() {
               </Suspense>
             }
           />
+      <Route path="*" element={<PageNotFount />} />    
       </Routes>
     </div>
   );

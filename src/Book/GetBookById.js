@@ -5,6 +5,7 @@ import bookImg from '../img/book.svg';
 function GetBookById() {
   const [book, setBook] = useState({});
   const [bookId, setBookId] = useState("")
+  const [isData, setIsData] = useState(false)
 
   const getBook = async () => {
     if (bookId == ""){
@@ -14,14 +15,16 @@ function GetBookById() {
       const res = await axiosClient.get(`/book/${bookId}`);
       if (res?.data) {
         setBook(res?.data)
+        setIsData(true)
       }
     } catch (err) {
+      setIsData(false)
     }
   };
   return (
-    <div className="flex flex-col mx-auto w-full  justify-center items-center">
+    <div className="flex flex-col mx-auto   justify-center items-center">
 
-    <div className="bg-slate-700   rounded-md py-2 flex flex-col items-center justify-center shadow-lg mb-10"> 
+    <div className="bg-slate-700 w-[1300px]  rounded-md py-2 flex flex-col items-center justify-center shadow-lg mb-10"> 
       <div className="flex w-[500px] mx-auto justify-center items-center gap-2 "> 
         <h1 className="text-lg text-white font-semibold">Book ID:</h1> 
         <input 
@@ -40,6 +43,9 @@ function GetBookById() {
       </button>
     </div>
 
+     {
+     isData 
+     &&
      <div key={book?._id} className="flex text-white gap-36 items-center bg-gray-800 w-[1000px] rounded-md p-4">
             <div className="ml-14 flex flex-col gap-6">
               <img src={bookImg} alt="" width="200px" />
@@ -70,7 +76,8 @@ function GetBookById() {
                 <span className="ml-4">{book?.penalty}</span>
               </div>
             </div>
-          </div>
+     </div>
+     }
     </div>
   )
 }
