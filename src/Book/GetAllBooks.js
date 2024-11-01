@@ -45,6 +45,7 @@ function GetAllBooks() {
         setTotalResult(res?.data?.length);
       }
     } catch (err) {
+      setAllBook({})
     }
   };
 
