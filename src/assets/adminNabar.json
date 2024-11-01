@@ -1,22 +1,26 @@
 [
   {
     "tag":"Books",
-    "link":"books"
+    "link":"/books"
   },
   {
     "tag":"Issued Books",
-    "link":"issued"
+    "link":"/issued"
+  },
+  {
+    "tag":"Assign",
+    "link":"/assign"
   },
   {
     "tag":"Student",
-    "link":"student"
+    "link":"/student"
   },
   {
     "tag":"Admin",
-    "link":"admin"
+    "link":"/admin"
   },
   {
     "tag":"Others",
-    "link":"others"
+    "link":"/others"
   }
 ]

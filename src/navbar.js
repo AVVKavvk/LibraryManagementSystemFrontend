@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import AdminNavbar from './assets/adminNabar.json'
-import { getItem, IsAdmin, IsLogged } from "./utils/localStorage";
+import { AdminID, getItem, IsAdmin, IsLogged } from "./utils/localStorage";
 import { MdAccountCircle } from "react-icons/md";
+import {Tooltip} from 'react-tooltip'
 const Navbar = ()=>{
   const isadmin= getItem(IsAdmin)
   const islogged= getItem(IsLogged)
-  // const islogged= false
+  const admin_id =getItem(AdminID)
+  
   return (
     <div className="bg-slate-200">
       <div className="mx-auto max-w-[1200px] flex  overflow-hidden  justify-between   items-center  md:px-20 py-3">
@@ -35,7 +37,8 @@ const Navbar = ()=>{
           {
             isadmin
             ?
-            <Link to="/admin/account" className="bg-white rounded-full w-[50px] h-[50px] flex justify-center items-center ">
+            <Link to={`/admin/${admin_id}`} data-tooltip-id="profile" data-tooltip-content="Profile"  className="bg-white rounded-full w-[50px] h-[50px] flex justify-center items-center ">
+            <Tooltip id="profile" />
             <MdAccountCircle size={40} />
             </Link>
           :

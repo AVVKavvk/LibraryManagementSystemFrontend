@@ -13,7 +13,7 @@ const StudentLogin = lazy(()=>import('./Login/StudentLogin'))
 const Login = lazy(()=>import('./components/Login'))
 const Signup = lazy(()=>import('./components/Signup'))
 const AdminAccount = lazy(()=> import('./components/AdminAccount'))
-
+const Book = lazy(()=>import('./Book/Book'))
 
 export const TOAST_SUCCESS = "toast_success";
 export const TOAST_ERROR = "toast_error";
@@ -44,14 +44,23 @@ function App() {
     }
   }, [toastData]);
   return (
-    <div className="bg-slate-100 min-h-[120vh]">
+    <div className="bg-slate-100 min-h-[100vh]">
       <LoadingBar color="#f11946" ref={loadingRef} />
         <Toaster />
         <Navbar/>
 
       <Routes>
+
       <Route
-            path="/admin/account"
+            path="/books/*"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Book />
+              </Suspense>
+            }
+      />
+      <Route
+            path="/admin/:admin_id"
             element={
               <Suspense fallback={<Loader />}>
                 <AdminAccount />
