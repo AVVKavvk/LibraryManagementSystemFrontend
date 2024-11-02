@@ -28,7 +28,7 @@ const AdminSignup = () => {
           setItem(IsAdmin,true)
           setItem(IsLogged,true)
           navigate('/')
-          
+          window.location.reload()
         }
 
      } catch (err) {
