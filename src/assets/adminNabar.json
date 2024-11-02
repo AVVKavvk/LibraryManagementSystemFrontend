@@ -16,10 +16,6 @@
     "link":"/student"
   },
   {
-    "tag":"Admin",
-    "link":"/admin"
-  },
-  {
     "tag":"Others",
     "link":"/others"
   }

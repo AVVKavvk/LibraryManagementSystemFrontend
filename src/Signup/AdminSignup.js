@@ -4,6 +4,7 @@ import { TOAST_ERROR, TOAST_SUCCESS } from "../App";
 import { useDispatch } from "react-redux";
 import { axiosClient } from "../utils/axios";
 import { Link, useNavigate } from "react-router-dom";
+import { getItem, IsAdmin } from "../utils/localStorage";
 
 const AdminSignup = () => {
   const [email, setEmail] = useState("");
@@ -11,8 +12,11 @@ const AdminSignup = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [confirm, setConfirmPassword] = useState("");
+  const isAdmin = getItem(IsAdmin)
+
   const dispatch= useDispatch('')
   const navigate = useNavigate('')
+
   const validatePhoneNumber = (phone) => {
 
     const phoneRegex = /^[0-9]{10}$/;
@@ -48,7 +52,7 @@ const AdminSignup = () => {
           password
         })
 
-        if (res){            
+        if (!isAdmin &&res){            
           navigate("/admin/login")
         }
 
@@ -61,7 +65,7 @@ const AdminSignup = () => {
   return (
     <div>
       <form onSubmit={SubmitForm} className="max-w-[400px] mx-auto p-6 my-8 rounded-lg shadow-lg">
-        <h2 className="text-center text-2xl font-bold mb-4">Sign Up</h2>
+        {!isAdmin && <h2 className="text-center text-2xl font-bold mb-4">Sign Up</h2>}
         {[
           { label: 'Name', type: 'text', stateSetter: setName },
           { label: 'Phone', type: 'tel', stateSetter: setPhone },
@@ -86,6 +90,9 @@ const AdminSignup = () => {
           Submit
         </button>
 
+        {
+        !isAdmin
+        &&
         <div className="flex mt-8 justify-center items-center gap-2">
           <h2>Already have an account </h2>
         <Link to="/admin/login"
@@ -94,6 +101,7 @@ const AdminSignup = () => {
           Login
         </Link>
         </div>
+        }
       </form>
     </div>
   );

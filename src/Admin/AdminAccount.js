@@ -4,7 +4,7 @@ import { axiosClient } from "../utils/axios"
 import { FaPhoneAlt } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import { AdminID, deleteUser, getItem, IsAdmin, IsLogged, setItem, UserEmail } from "../utils/localStorage";
-import Login from "./Login";
+import Login from "../components/Login";
 import Placeholder from "../helper/Placeholder";
 
 const AdminAccount = () => {
@@ -45,9 +45,9 @@ const AdminAccount = () => {
       {
         adminData
         ?
-        <div className="flex max-w-[1000px] text-xl mx-auto justify-center items-center shadow-md shadow-green-300 px-5 py-10 gap-7 mt-8 h-[50vh] ">
+        <div className="flex max-w-[1000px] text-xl mx-auto justify-center  shadow-lg  rounded px-5 py-10 gap-7 mt-8 h-[50vh] ">
         <div className="flex flex-col gap-16 justify-center items-center ">
-          <div className="flex justify-center flex-col w-[400px] items-center mx-auto gap-5 bg-gray-300 rounded-md p-4 ">
+          <div className="flex justify-center flex-col w-[400px] items-center mx-auto gap-5 shadow-lg rounded-md p-4 ">
             <h1 className="bg-green-400 rounded-md px-4 py-1">
               Permissions
             </h1>
@@ -64,11 +64,11 @@ const AdminAccount = () => {
             Logout
           </button>
         </div>
-        <div className="flex justify-center flex-col items-center py-10 mx-auto gap-10 bg-gray-300 rounded-md p-4 ">
+        <div className="flex justify-center flex-col items-center py-10 mx-auto gap-10 shadow-md rounded-md p-4 ">
           <h1 className="bg-green-400 rounded-md px-4 py-1">
             Profile
           </h1>
-          <div className="flex justify-center bg-gray-200 rounded-md p-4 items-center mx-auto flex-col gap-5">
+          <div className="flex justify-center shadow-lg rounded-md p-4 items-center mx-auto flex-col gap-5">
             <h1>{adminData?.name}</h1>
             <h2 className="flex justify-center mx-auto gap-5 items-center "> 
               <FaPhoneAlt/>
@@ -79,9 +79,6 @@ const AdminAccount = () => {
               <span>{adminData?.email}</span>
             </h2>
           </div>
-          <Link className="bg-green-500 rounded-md  hover:bg-green-600 px-4 py-1">
-            Update
-          </Link>
         </div>
         </div>
         :
