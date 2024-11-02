@@ -13,8 +13,9 @@ const StudentSignup = lazy(()=>import('./Signup/StudentSignup'))
 const StudentLogin = lazy(()=>import('./Login/StudentLogin'))
 const Login = lazy(()=>import('./components/Login'))
 const Signup = lazy(()=>import('./components/Signup'))
-const AdminAccount = lazy(()=> import('./components/AdminAccount'))
 const Book = lazy(()=>import('./Book/Book'))
+const Admin = lazy(()=>import('./Admin/Admin'))
+const Home = lazy(()=>import('./components/Home'))
 
 export const TOAST_SUCCESS = "toast_success";
 export const TOAST_ERROR = "toast_error";
@@ -53,6 +54,14 @@ function App() {
       <Routes>
 
       <Route
+            path="/"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Home />
+              </Suspense>
+            }
+      />
+      <Route
             path="/books/*"
             element={
               <Suspense fallback={<Loader />}>
@@ -61,10 +70,10 @@ function App() {
             }
       />
       <Route
-            path="/admin/:admin_id"
+            path="/admin/*"
             element={
               <Suspense fallback={<Loader />}>
-                <AdminAccount />
+                <Admin />
               </Suspense>
             }
       />
