@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import { axiosClient } from '../utils/axios';
+import React, { useState } from "react";
+import { axiosClient } from "../utils/axios";
+import { getItem, IsAdmin } from "../utils/localStorage";
+import { Navigate } from "react-router-dom";
 
 function UpdateBookCount() {
+  const isAdmin = getItem(IsAdmin);
+
   const [bookId, setBookId] = useState("");
   const [count, setCount] = useState(0);
 
@@ -19,7 +23,7 @@ function UpdateBookCount() {
     }
 
     try {
-      const intCount = parseInt(count, 0); 
+      const intCount = parseInt(count, 0);
       const res = await axiosClient.put(`/admin/book/${bookId}`, {
         count: intCount,
       });
@@ -29,10 +33,19 @@ function UpdateBookCount() {
     }
   };
 
+  if (!isAdmin) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <div>
-      <form onSubmit={updateCount} className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md space-y-4">
-        <h2 className="text-xl font-semibold text-gray-800">Update Book Count</h2>
+      <form
+        onSubmit={updateCount}
+        className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md space-y-4"
+      >
+        <h2 className="text-xl font-semibold text-gray-800">
+          Update Book Count
+        </h2>
 
         <div>
           <label className="block text-gray-700">Book ID</label>
@@ -57,7 +70,7 @@ function UpdateBookCount() {
         </div>
 
         <button
-          type="submit" 
+          type="submit"
           className="w-full py-2 px-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
         >
           Update
